@@ -14,7 +14,7 @@ class QuizViewController: UIViewController {
     var quizArray = [Any]()
     
     //正解数を数えるための変数
-    var correctAnser: Int = 0
+    var correctAnswer: Int = 0
     
     //クイズを表示するTextView
     @IBOutlet var quizTextView: UITextView!
@@ -28,12 +28,12 @@ class QuizViewController: UIViewController {
         super.viewDidLoad()
         
         //quizArrayに問題文、3つの選択肢、答えの番号が入った配列を追加
-        quizArray.append(["問題文1", "選択肢1", "選択肢2", "選択肢3", 2])
-        quizArray.append(["問題文2", "選択肢1", "選択肢2", "選択肢3", 1])
-        quizArray.append(["問題文3", "選択肢1", "選択肢2", "選択肢3", 3])
-        quizArray.append(["問題文4", "選択肢1", "選択肢2", "選択肢3", 3])
-        quizArray.append(["問題文5", "選択肢1", "選択肢2", "選択肢3", 2])
-        quizArray.append(["問題文6", "選択肢1", "選択肢2", "選択肢3", 1])
+        quizArray.append(["Appleの2015年のCEOの名前は？", "スティーブ・ジョブズ", "ティムクック", " ジョナサンアイブ", 2])
+        quizArray.append(["画面タッチの指の圧力を検出する機能をなんという？", "3Dタッチ", "4Dタッチ", "スーパータッチ", 1])
+        quizArray.append(["iPod touchのモデルの中で最大容量のものは何GB?", "64GB", "128GB", "160GB", 3])
+        quizArray.append(["1985年、Appleを追放されたジョブズが立ち上げた会社の名前の正式表記は？", "NEXt,Inc", "NExT,Inc.", "NeXT,Inc.", 3])
+        quizArray.append(["2015年9月30日にリリースされたOSXの名前は？", "EL Captain", "El Capitan", "ElCaptital", 2])
+        quizArray.append(["Apple WatchはiPhoneとどんな通信方式でペアリングされる？", "FM電波", "Wi-Fi", "Bluetooth", 1])
         
         //問題文をシャッフル
         quizArray.shuffle()
@@ -59,6 +59,7 @@ class QuizViewController: UIViewController {
         
     }
     
+    //自動で結果画面にいくようにするためのメソッド
     func performSegueToResult(){
          performSegue(withIdentifier: "toResultView", sender: nil)
          
@@ -71,8 +72,9 @@ class QuizViewController: UIViewController {
         let tmpArray = quizArray[0] as! [Any]
         
         if tmpArray[4] as! Int == sender.tag{
+            
             //正解数を増やす
-            correctAnser = correctAnser + 1
+            correctAnswer = correctAnswer + 1
         }
         
         //解いた問題をquizArrayから取り除く
@@ -94,7 +96,7 @@ class QuizViewController: UIViewController {
     override func prepare (for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "toResultView"{
             let resultViewController = segue.destination as! ResultViewController
-            resultViewController.correctAnser = self.correctAnser
+            resultViewController.correctAnswer = self.correctAnswer
         }
     }
 
