@@ -43,6 +43,8 @@ class QuizViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    
     func choiceQuiz(){
         //一時的にクイズを取り出しておく配列
         let tmpArray = quizArray[0] as! [Any]
@@ -61,6 +63,7 @@ class QuizViewController: UIViewController {
          performSegue(withIdentifier: "toResultView", sender: nil)
          
      }
+    
     
     @IBAction func choiceAnswer(sender: UIButton){
         //引数のsender.tagに書くにされているTagの値を使って処理を区別する
@@ -83,8 +86,17 @@ class QuizViewController: UIViewController {
         }
         
         
+        
     }
     
+    
+    //セグエを準備(prepare)する時に呼ばれるメソッド
+    override func prepare (for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "toResultView"{
+            let resultViewController = segue.destination as! ResultViewController
+            resultViewController.correctAnser = self.correctAnser
+        }
+    }
 
     
 

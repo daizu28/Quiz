@@ -20,11 +20,14 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        resultLabel.text = String(correctAnswer)
     }
     
     
     @IBAction func back(){
-        
+        self.presentingViewController?.presentingViewController?
+            .dismiss(animated: true, completion: nil)
     }
 
     /*
